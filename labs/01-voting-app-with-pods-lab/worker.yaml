@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: worker-pod
+  labels:
+    role: worker-pod
+spec:
+  containers:
+    - name: worker-pod
+      image: kodekloud/examplevotingapp_worker:v1
+      imagePullPolicy: Always
+  restartPolicy: Always
+  

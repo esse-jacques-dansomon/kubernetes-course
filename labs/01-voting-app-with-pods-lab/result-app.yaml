@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: result-pod
+  labels:
+    name: result-pod
+    app: demo-voting-app
+spec:
+  containers:
+    - name: result-app
+      image: kodekloud/examplevotingapp_result:v1
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 80
+          protocol: TCP
+  restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: result-service
+spec:
+  selector:
+    name: result-pod
+    app: demo-voting-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30005
+  type: NodePort
